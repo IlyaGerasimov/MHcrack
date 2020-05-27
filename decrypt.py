@@ -9,7 +9,6 @@ def decrypt_hack(c, file):
         exit(cipher)
     file.close()
     c = customtypes.type_int(c, True)
-    c = 548
     m = hack(cipher.w, cipher.n, c)
     print("Found possible m in bytes:", m)
     try:
