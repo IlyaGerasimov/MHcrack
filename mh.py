@@ -30,7 +30,7 @@ def search(u, s, n):
         s = s - m[k] * u[k]
         k = k - 1
     if s == 0:
-        return n
+        return m
     return None
 
 
@@ -54,14 +54,14 @@ class MH:
                 self.w[i] = customtypes.type_int(self.w[i], True)
             self.n = customtypes.type_int(n, True)
         else:
-            u = list([random.getrandbits(b)])
+            u = list([(1 << (b - 1)) + random.getrandbits(b - 1)])
             summ = u[0]
             flag = False
             for i in range(n):
-                tmp = random.randint(summ, (1 << (b + i)) - 1)
+                tmp = random.randint(summ + 1, (1 << (b + i)) - 1)
                 u.append(tmp)
                 summ += tmp
-            k = random.randint(summ, (1 << (b + n)) - 1)
+            k = random.randint(summ + 1, (1 << (b + n)) - 1)
             a = random.randint(2, k - 1)
             while math.gcd(a, k) != 1:
                 a = random.randint(2, k - 1)
@@ -88,9 +88,9 @@ class MH:
         return c
 
     def decrypt(self, c):
-        s = self.a * c
+        s = self.a * c % self.k
         m = search(self.u, s, self.n)
         res = 0
-        for i in range(len(m) - 1, -1, -1):
+        for i in range(len(m)):
             res = 2 * res + m[i]
         return res

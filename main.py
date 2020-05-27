@@ -2,7 +2,7 @@ import argparse
 import os
 import program_config
 from encrypt import encrypt_inter, encrypt_cli
-from decrypt import decrypt_hack
+from decrypt import decrypt_hack, decrypt_pure
 from gen import gen
 
 

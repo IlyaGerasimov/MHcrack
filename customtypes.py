@@ -16,7 +16,7 @@ def type_int(m, is_base=False):
 
 def type_bytes(m, is_base=False):
     if type(m) is int:
-        if ((m.bit_length() + 3) // 4) % 2 == 1:
+        if ((m.bit_length() + 3) // 4) % 2 == 1 or m.bit_length() == 0:
             return bytes.fromhex('0' + hex(m).split('x')[1])
         else:
             return bytes.fromhex(hex(m).split('x')[1])

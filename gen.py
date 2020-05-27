@@ -6,6 +6,7 @@ from mh import MH
 
 def gen(n, b):
     cipher = MH(n=n, b=b)
+    print(cipher.u, cipher.w, cipher.a, cipher.k)
     with open("./keys/private", 'wb') as f:
         f.write(b'-----BEGIN PRIVATE KEY-----' +
                 bytes(os.linesep, "ascii") + base64.b32encode(customtypes.type_bytes(cipher.n)) +
